@@ -1,0 +1,9 @@
+# HyperSlop
+
+A parody landing page for a made-up "AI agent" meme coin, built as a front-end experiment.
+
+It is satire. There is no token, no contract address, no wallet connect and no buy button. Everything on the page is a joke about meme-coin tech narratives.
+
+Open `index.html` in a browser. No build step. To host it, enable GitHub Pages on the `main` branch.
+
+What's in it: a scrolling ticker, a typed "agent" terminal, a narrative generator with a slop meter, fake tokenomics, a roadmap where everything is Q3, and an honest FAQ.

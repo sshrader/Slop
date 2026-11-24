@@ -1,0 +1,220 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>HyperSlop AI</title>
+<meta name="description" content="A parody landing page for a made-up AI agent meme coin. Not a real token.">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=Space+Grotesk:wght@500;700&display=swap">
+<style>
+:root{--bg:#07080a;--panel:#0e1115;--line:#1b2027;--fg:#f2f5f7;--mut:#8b96a1;--acid:#c6ff3d;--vio:#8a5cff;--cy:#3de0ff}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.55 "Space Grotesk",system-ui,sans-serif;overflow-x:hidden}
+body::before{content:"";position:fixed;inset:0;z-index:-1;background:
+ radial-gradient(600px 400px at 85% -5%,rgba(138,92,255,.28),transparent 70%),
+ radial-gradient(500px 380px at 5% 30%,rgba(61,224,255,.14),transparent 70%),
+ radial-gradient(500px 400px at 60% 95%,rgba(198,255,61,.10),transparent 70%)}
+body::after{content:"";position:fixed;inset:0;z-index:-1;opacity:.35;background-image:linear-gradient(var(--line) 1px,transparent 1px),linear-gradient(90deg,var(--line) 1px,transparent 1px);background-size:56px 56px;mask-image:radial-gradient(ellipse at 50% 20%,#000,transparent 75%);-webkit-mask-image:radial-gradient(ellipse at 50% 20%,#000,transparent 75%)}
+a{color:inherit}
+.wrap{max-width:1080px;margin:0 auto;padding:0 20px}
+.mono{font-family:"JetBrains Mono",ui-monospace,monospace}
+header{display:flex;align-items:center;gap:16px;padding:18px 0}
+.logo{display:flex;align-items:center;gap:10px;font-weight:700;letter-spacing:-.02em;text-decoration:none}
+.logo i{width:26px;height:26px;border-radius:8px;background:conic-gradient(from 200deg,var(--acid),var(--cy),var(--vio),var(--acid));display:block;animation:spin 6s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+nav{margin-left:auto;display:flex;gap:6px;flex-wrap:wrap}
+nav a{padding:7px 12px;border-radius:99px;color:var(--mut);text-decoration:none;font-size:14px}
+nav a:hover{color:var(--fg);background:var(--panel)}
+.ticker{overflow:hidden;border-block:1px solid var(--line);background:rgba(14,17,21,.6);font-size:13px;color:var(--mut)}
+.ticker div{display:flex;gap:42px;width:max-content;padding:9px 0;animation:tick 38s linear infinite}
+@keyframes tick{to{transform:translateX(-50%)}}
+.ticker b{color:var(--acid);font-weight:500}
+.hero{padding:70px 0 54px;text-align:center}
+.pill{display:inline-flex;gap:8px;align-items:center;padding:6px 12px;border:1px solid var(--line);border-radius:99px;background:var(--panel);font-size:13px;color:var(--mut)}
+.pill i{width:7px;height:7px;border-radius:50%;background:var(--acid);box-shadow:0 0 10px var(--acid);animation:blink 1.6s infinite}
+@keyframes blink{50%{opacity:.25}}
+h1{font-size:clamp(38px,7vw,78px);line-height:1.03;letter-spacing:-.035em;margin:22px auto 18px;max-width:900px;text-wrap:balance}
+.grad{background:linear-gradient(95deg,var(--acid),var(--cy) 45%,var(--vio));-webkit-background-clip:text;background-clip:text;color:transparent}
+.lede{max-width:640px;margin:0 auto;color:var(--mut);font-size:18px}
+.cta{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:30px}
+.btn{font:inherit;font-weight:700;border:1px solid var(--line);background:var(--panel);color:var(--fg);padding:12px 20px;border-radius:12px;cursor:pointer;text-decoration:none}
+.btn.pri{background:var(--acid);color:#0b0d06;border-color:var(--acid)}
+.btn:hover{filter:brightness(1.1)}
+section{padding:54px 0}
+h2{font-size:clamp(26px,4vw,38px);letter-spacing:-.025em;margin:0 0 8px}
+.sub{color:var(--mut);margin:0 0 28px;max-width:620px}
+.grid{display:grid;gap:12px;grid-template-columns:repeat(3,minmax(0,1fr))}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:20px;min-width:0}
+.card h3{margin:10px 0 6px;font-size:18px}
+.card p{margin:0;color:var(--mut);font-size:15px}
+.tag{font:500 11px "JetBrains Mono",monospace;letter-spacing:.08em;text-transform:uppercase;color:var(--acid)}
+.term{background:#050607;border:1px solid var(--line);border-radius:16px;overflow:hidden}
+.term .bar{display:flex;gap:6px;padding:11px 14px;border-bottom:1px solid var(--line);align-items:center}
+.term .bar i{width:10px;height:10px;border-radius:50%;background:#2a313a}
+.term .bar span{margin-left:8px;color:var(--mut);font-size:12px}
+#log{padding:16px;min-height:230px;font-size:13px;line-height:1.7;color:#b6c2cc;overflow:hidden}
+#log .ok{color:var(--acid)}#log .wr{color:#ffb454}#log .dim{color:#5a6570}
+.cols{display:grid;grid-template-columns:1.1fr .9fr;gap:14px}
+.gen{display:flex;flex-direction:column;gap:14px}
+#out{font-size:20px;line-height:1.35;min-height:92px;padding:18px;border:1px dashed var(--line);border-radius:14px;background:rgba(14,17,21,.7)}
+.meter{height:10px;border-radius:99px;background:var(--line);overflow:hidden}
+.meter i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--acid),#ffb454,#ff5a5a);transition:width .5s}
+.row{display:flex;justify-content:space-between;color:var(--mut);font-size:13px}
+.tok{display:grid;gap:10px}
+.tok div{display:flex;justify-content:space-between;gap:12px;border-bottom:1px solid var(--line);padding:11px 0}
+.tok b{font-weight:500}.tok span{color:var(--mut);text-align:right}
+.road{display:grid;gap:10px;grid-template-columns:repeat(4,minmax(0,1fr))}
+.road .card{position:relative}
+.road .n{font:500 12px "JetBrains Mono",monospace;color:var(--vio)}
+.logos{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}
+.logos div{height:64px;border:1px dashed var(--line);border-radius:12px;display:grid;place-items:center;color:#4b5560;font:500 12px "JetBrains Mono",monospace}
+details{border-bottom:1px solid var(--line);padding:14px 0}
+summary{cursor:pointer;font-weight:700}
+details p{color:var(--mut);margin:8px 0 0}
+footer{border-top:1px solid var(--line);padding:30px 0 60px;color:var(--mut);font-size:13px}
+footer b{color:#ffb454;font-weight:500}
+@media(max-width:860px){.grid,.road{grid-template-columns:1fr 1fr}.cols{grid-template-columns:1fr}.logos{grid-template-columns:1fr 1fr}}
+@media(max-width:560px){.grid,.road{grid-template-columns:1fr}nav{display:none}.hero{padding-top:44px}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important}}
+</style>
+</head>
+<body>
+<div class="ticker" aria-hidden="true"><div id="tk"></div></div>
+<div class="wrap">
+<header>
+  <a class="logo" href="#"><i></i>HyperSlop<span style="color:var(--acid)">.ai</span></a>
+  <nav><a href="#agent">Agent</a><a href="#narrative">Narrative</a><a href="#tokenomics">Tokenomics</a><a href="#roadmap">Roadmap</a><a href="#faq">FAQ</a></nav>
+</header>
+
+<div class="hero">
+  <span class="pill"><i></i>Agent online · 0 humans in the loop · 1 guy in the loop</span>
+  <h1>The first <span class="grad">autonomous, quantum-resistant, agentic</span> Layer&nbsp;3 for&nbsp;vibes.</h1>
+  <p class="lede">HyperSlop is a decentralized intelligence mesh that tokenizes attention, aligns incentives, and gently orchestrates a community-owned future. It does not do any of these things. It is a parody.</p>
+  <div class="cta"><a class="btn pri" href="#narrative">Generate my narrative</a><a class="btn" href="#agent">Watch the agent</a></div>
+</div>
+
+<section id="agent">
+  <span class="tag">Autonomous agent</span>
+  <h2>Live from the mesh</h2>
+  <p class="sub">An agent is definitely working on something. The log below is a typed loop on this page.</p>
+  <div class="term mono"><div class="bar"><i></i><i></i><i></i><span>hyperslop-agent — tty0</span></div><div id="log"></div></div>
+</section>
+
+<section>
+  <span class="tag">Capabilities</span>
+  <h2>Powered by words</h2>
+  <p class="sub">Every feature is a noun phrase.</p>
+  <div class="grid">
+    <div class="card"><span class="tag">01</span><h3>Agentic Orchestration</h3><p>Agents coordinate agents that coordinate the agent coordinators. Nobody can say what they ship.</p></div>
+    <div class="card"><span class="tag">02</span><h3>Zero-Knowledge Everything</h3><p>We know nothing, and so can you, provably. Proofs are available on request and by request we mean never.</p></div>
+    <div class="card"><span class="tag">03</span><h3>Quantum-Resistant</h3><p>Resistant to quantum computers the way a cardboard box is resistant to the weather forecast.</p></div>
+    <div class="card"><span class="tag">04</span><h3>DePIN-Native</h3><p>Decentralized physical infrastructure: one rented server, lovingly decentralized into a second tab.</p></div>
+    <div class="card"><span class="tag">05</span><h3>Omnichain Liquidity</h3><p>Liquidity everywhere, in theory. In practice, a chart with a vertical candle.</p></div>
+    <div class="card"><span class="tag">06</span><h3>Community-Owned</h3><p>The community owns it the way you own a share of the sky.</p></div>
+  </div>
+</section>
+
+<section id="narrative">
+  <span class="tag">Narrative engine</span>
+  <h2>Make your own slop</h2>
+  <p class="sub">Press the button for a fresh, completely empty pitch. Then press it again.</p>
+  <div class="cols">
+    <div class="gen">
+      <div id="out" aria-live="polite">Press generate.</div>
+      <div><div class="row"><span>Slop meter</span><span id="sv">0%</span></div><div class="meter"><i id="sm"></i></div></div>
+      <div class="cta" style="justify-content:flex-start;margin:0"><button class="btn pri" id="gen" type="button">Generate narrative</button><button class="btn" id="cp" type="button">Copy</button></div>
+    </div>
+    <div class="card">
+      <span class="tag">Red flags this page contains</span>
+      <div class="tok" style="margin-top:8px">
+        <div><b>Verifiable product</b><span>none</span></div>
+        <div><b>Named team</b><span>none</span></div>
+        <div><b>Source code</b><span>none</span></div>
+        <div><b>Buzzwords per sentence</b><span id="bps">—</span></div>
+        <div><b>Emoji count</b><span>strictly 0 (we have standards)</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="tokenomics">
+  <span class="tag">Tokenomics</span>
+  <h2>Fully fair, fully imaginary</h2>
+  <p class="sub">These numbers are decorative. There is no token on this page.</p>
+  <div class="cols">
+    <div class="card tok">
+      <div><b>Supply</b><span>1,000,000,000 (a very normal number)</span></div>
+      <div><b>Community</b><span>100% (of the people who read this)</span></div>
+      <div><b>Team</b><span>0% (the team is not a legal entity)</span></div>
+      <div><b>Tax</b><span>0%, buy or sell, for the vibes</span></div>
+      <div><b>Liquidity</b><span>burned by an AI, emotionally</span></div>
+    </div>
+    <div class="card"><span class="tag">Contract address</span><h3 class="mono" style="font-size:15px;color:var(--mut)">There isn't one.</h3><p>No wallet connect, no buy button, no address to copy. If a page like this ever shows you one with a countdown, close the tab.</p></div>
+  </div>
+</section>
+
+<section id="roadmap">
+  <span class="tag">Roadmap</span>
+  <h2>Q3, forever</h2>
+  <p class="sub">Every milestone is next quarter.</p>
+  <div class="road">
+    <div class="card"><span class="n">Q3</span><h3>Mesh v1</h3><p>Announce the mesh.</p></div>
+    <div class="card"><span class="n">Q3</span><h3>Agent Marketplace</h3><p>Announce the marketplace.</p></div>
+    <div class="card"><span class="n">Q3</span><h3>Layer 3</h3><p>Announce a layer, any layer.</p></div>
+    <div class="card"><span class="n">Q3</span><h3>Strategic partnerships</h3><p>Announce a partnership with ourselves.</p></div>
+  </div>
+</section>
+
+<section>
+  <span class="tag">Trusted by</span>
+  <h2>Partners</h2>
+  <p class="sub">Placeholder slots, honestly labeled.</p>
+  <div class="logos"><div>YOUR LOGO</div><div>A BIG NAME</div><div>VC (MAYBE)</div><div>"STEALTH"</div></div>
+</section>
+
+<section id="faq">
+  <span class="tag">FAQ</span>
+  <h2>Questions</h2>
+  <details><summary>What does HyperSlop actually do?</summary><p>It renders this page. Beyond that, ask a roadmap.</p></details>
+  <details><summary>Is this financial advice?</summary><p>No. It isn't advice of any kind, and there is no coin here. It is a front-end experiment.</p></details>
+  <details><summary>Wen utility?</summary><p>Q3.</p></details>
+  <details><summary>How do I spot a real project?</summary><p>You can open its code, name its team, use its product and check its contract on-chain. Slop fails all four.</p></details>
+</section>
+</div>
+
+<footer><div class="wrap"><b>Parody.</b> HyperSlop is a fictional brand made to poke fun at meme-coin tech narratives. It is not a token, not a project and not financial advice. Nothing here connects to a wallet or a chain.</div></footer>
+
+<script>
+(function(){
+  // ticker
+  var items=['AGENTS <b>+4,200%</b>','MESH UPTIME <b>99.99%</b>','HUMANS IN LOOP <b>1</b>','VIBES <b>ALIGNED</b>','Q3 <b>SOON</b>','NARRATIVE <b>LOADED</b>','ZK PROOFS <b>PENDING</b>','COMMUNITY <b>OWNED*</b>'];
+  var tk=document.getElementById('tk');tk.innerHTML=items.concat(items).map(function(s){return '<span class="mono">'+s+'</span>'}).join('');
+
+  // agent terminal
+  var lines=[['dim','$ hyperslop --agent --autonomous --quantum'],['ok','[ok] spawning 12 sub-agents to supervise 3 sub-agents'],['','[..] aligning incentives across omnichain liquidity'],['wr','[warn] roadmap item "Layer 3" slipped to Q3'],['ok','[ok] tokenizing attention (0 tokens minted)'],['','[..] generating narrative with a model we will not name'],['ok','[ok] ZK proof: we know nothing, provably'],['wr','[warn] human in the loop asked what we are building'],['','[..] reply sent: "orchestrating"'],['ok','[ok] vibes verified']];
+  var log=document.getElementById('log'),li=0;
+  function addLine(){
+    var l=lines[li%lines.length],d=document.createElement('div');if(l[0])d.className=l[0];log.appendChild(d);
+    var txt=l[1],i=0;(function t(){d.textContent=txt.slice(0,++i);if(i<txt.length)setTimeout(t,16);else{li++;while(log.children.length>9)log.removeChild(log.firstChild);setTimeout(addLine,520)}})()}
+  addLine();
+
+  // narrative generator
+  var A=['autonomous','agentic','quantum-resistant','decentralized','zero-knowledge','omnichain','community-owned','AI-native','verifiable','hyper-scalable','permissionless'];
+  var N=['intelligence mesh','agent economy','attention layer','liquidity fabric','inference network','coordination protocol','trust engine','compute marketplace','vibe oracle'];
+  var V=['orchestrates','tokenizes','aligns','unlocks','democratizes','accelerates','reimagines','harmonizes'];
+  var O=['global attention','human-AI synergy','the future of work','on-chain consciousness','trustless collaboration','a flywheel of incentives','the next billion users','everything, everywhere'];
+  var T=['Q3 launch','mainnet soon','stealth partnerships','a 100x narrative','the next paradigm shift','real utility (soon)'];
+  var P=function(a){return a[Math.floor(Math.random()*a.length)]};
+  var out=document.getElementById('out'),sm=document.getElementById('sm'),sv=document.getElementById('sv'),bps=document.getElementById('bps');
+  function gen(){
+    var a1=P(A),a2=P(A);while(a2===a1)a2=P(A);
+    var s='The first '+a1+', '+a2+' '+P(N)+' that '+P(V)+' '+P(O)+'. '+P(T).replace(/^./,function(c){return c.toUpperCase()})+'.';
+    out.textContent=s;var buzz=(s.match(/[a-z-]+/gi)||[]).filter(function(w){return A.concat(N,O).join(' ').toLowerCase().indexOf(w.toLowerCase())>-1&&w.length>3}).length;
+    var pct=Math.min(100,62+Math.floor(Math.random()*38));sm.style.width=pct+'%';sv.textContent=pct+'%';bps.textContent=(buzz/2).toFixed(1)}
+  document.getElementById('gen').onclick=gen;
+  document.getElementById('cp').onclick=function(){var b=this,t=out.textContent;if(navigator.clipboard&&navigator.clipboard.writeText)navigator.clipboard.writeText(t).then(function(){b.textContent='Copied';setTimeout(function(){b.textContent='Copy'},1100)},function(){})};
+})();
+</script>
+</body>
+</html>
