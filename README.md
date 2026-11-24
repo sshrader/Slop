@@ -1,8 +1,8 @@
 # HyperSlop
 
-A parody landing page for a made-up "AI agent" meme coin, built as a front-end experiment.
+A landing page experiment for a made-up "AI agent" coin.
 
-It is satire. There is no token, no contract address, no wallet connect and no buy button. Everything on the page is a joke about meme-coin tech narratives.
+It is fictional: there is no token, no contract address, no wallet connect and no buy button.
 
 Open `index.html` in a browser. No build step. To host it, enable GitHub Pages on the `main` branch.
 

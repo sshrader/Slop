@@ -21,7 +21,7 @@
 <div class="fb" id="fb"></div><div class="row"><button class="btn" id="nx" type="button" hidden>Next</button></div></div>
 <div class="card" id="end" hidden><h2 style="margin:0 0 6px" id="et"></h2><p class="sub" id="ed" style="margin-bottom:16px"></p><div class="row"><button class="btn pri" id="again" type="button">Play again</button><button class="btn" id="share" type="button">Copy my score</button></div></div>
 </div>
-<footer class="lab"><div class="wrap"><b>Parody.</b> HyperSlop is a fictional brand that pokes fun at meme-coin narratives. Nothing here is a token, a project or financial advice, and nothing connects to a wallet or a chain.</div></footer>
+<footer class="lab"><div class="wrap">Internal experiment. HyperSlop is a fictional brand, not a live token.</div></footer>
 <script src="lab.js"></script>
 <script>
 var items=[
@@ -47,6 +47,6 @@ $('nx').onclick=function(){i++;if(i>=order.length)finish();else show()};
 function finish(){$('g').hidden=true;$('end').hidden=false;var p=score/order.length,t=p>=.9?'Slop detector':p>=.65?'Sharp eyes':p>=.4?'Mildly slopped':'Fully slopped';
  $('et').textContent=score+' / '+order.length+' — '+t;$('ed').textContent=p>=.9?'You could spot a rug from the lobby.':p>=.65?'Not many pitches get past you.':p>=.4?'A few got through. It happens to everyone.':'You would have bought the Layer 3. No shame.'}
 $('again').onclick=start;
-$('share').onclick=function(){copy('I scored '+score+'/'+order.length+' on Slop or Not (HyperSlop, a parody). Can you beat it?',this)};
+$('share').onclick=function(){copy('I scored '+score+'/'+order.length+' on Slop or Not. Can you beat it?',this)};
 start();</script>
 </body></html>

@@ -16,14 +16,14 @@ canvas{width:100%;height:auto;background:#050607;border:1px solid var(--line);bo
 <p class="sub">Drag the last candle. Watch the caption react. A chart is only as honest as the person holding it.</p>
 <canvas id="cv" width="900" height="420"></canvas><div id="cap"></div><div id="pc"></div><div class="row" style="margin-top:16px"><button class="btn pri" id="up" type="button">Pump</button><button class="btn" id="dn" type="button">Dump</button><button class="btn" id="rs" type="button">Reset</button></div>
 </div>
-<footer class="lab"><div class="wrap"><b>Parody.</b> HyperSlop is a fictional brand that pokes fun at meme-coin narratives. Nothing here is a token, a project or financial advice, and nothing connects to a wallet or a chain.</div></footer>
+<footer class="lab"><div class="wrap">Internal experiment. HyperSlop is a fictional brand, not a live token.</div></footer>
 <script src="lab.js"></script>
 <script>
 var N=48,c,x=$('cv').getContext('2d'),S=[],start=100;
 function reset(){var r=rng(Date.now()),v=100;S=[];for(var i=0;i<N;i++){var o=v;v=Math.max(20,v+(r()-.5)*7);S.push([o,v])}start=S[0][0];draw()}
 function lo(){return Math.min.apply(null,S.map(function(s){return Math.min(s[0],s[1])}))*.92}
 function hi(){return Math.max.apply(null,S.map(function(s){return Math.max(s[0],s[1])}))*1.08}
-var CAPS=[[-70,'This is fine.'],[-30,'Healthy correction.'],[-8,'Accumulation zone.'],[8,'Consolidating.'],[40,'Number go up.'],[120,'We are so early.'],[1e9,'Generational. (Parody chart.)']];
+var CAPS=[[-70,'This is fine.'],[-30,'Healthy correction.'],[-8,'Accumulation zone.'],[8,'Consolidating.'],[40,'Number go up.'],[120,'We are so early.'],[1e9,'Generational.']];
 function draw(){var W_=900,H=420,a=lo(),b=hi(),Y=function(v){return H-24-(v-a)/(b-a)*(H-48)};x.clearRect(0,0,W_,H);
  x.strokeStyle='#14181d';x.lineWidth=1;for(var i=1;i<5;i++){x.beginPath();x.moveTo(0,i*H/5);x.lineTo(W_,i*H/5);x.stroke()}
  var w=W_/N;S.forEach(function(s,i){var up=s[1]>=s[0],col=up?'#c6ff3d':'#ff5a5a';x.strokeStyle=col;x.fillStyle=col;var cx=i*w+w/2,top=Y(Math.max(s[0],s[1])),bt=Y(Math.min(s[0],s[1]));x.beginPath();x.moveTo(cx,top-6);x.lineTo(cx,bt+6);x.stroke();x.fillRect(cx-w*.3,top,w*.6,Math.max(2,bt-top))});
