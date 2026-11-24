@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Whitepaper generator · HyperSlop</title>
+<meta name="description" content="Ten pages of confident nonsense. Name your project and get a whitepaper that says nothing at length.">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=Space+Grotesk:wght@500;700&display=swap">
+<link rel="stylesheet" href="lab.css">
+<style>
+.paper{background:#f6f4ee;color:#17181a;border-radius:6px;padding:46px 44px;font:16px/1.65 Georgia,"Times New Roman",serif;box-shadow:0 20px 60px rgba(0,0,0,.5)}
+.paper h2{font:700 30px/1.15 Georgia,serif;margin:0 0 4px}.paper h3{font:700 18px Georgia,serif;margin:26px 0 6px}.paper .by{color:#6b6a63;font-size:14px;margin-bottom:18px}
+.paper pre{background:#ebe8de;padding:14px;border-radius:6px;overflow-x:auto;font:13px/1.35 "JetBrains Mono",monospace}
+.paper table{border-collapse:collapse;width:100%;font-size:15px}.paper td{border-bottom:1px solid #d9d5c7;padding:7px 4px}.paper td:last-child{text-align:right}
+.paper .stamp{display:inline-block;border:2px solid #b8741a;color:#b8741a;padding:3px 10px;font:700 12px "JetBrains Mono",monospace;letter-spacing:.06em;transform:rotate(-2deg)}
+@media(max-width:560px){.paper{padding:26px 20px}}
+@media print{body::before{display:none}header.lab,.row,.sub,footer.lab,h1,.tag{display:none}.paper{box-shadow:none}}
+</style></head><body>
+<div class="wrap">
+<header class="lab"><a class="logo" href="index.html">HyperSlop<span>.ai</span></a><a class="back" href="index.html#lab">← All experiments</a></header>
+<span class="tag">Document</span>
+<h1>Whitepaper generator</h1>
+<p class="sub">Ten pages of confident nonsense. Name your project and get a whitepaper that says nothing at length.</p>
+<div class="card" style="margin-bottom:18px"><label for="nm">Project name</label><input id="nm" value="HyperSlop" maxlength="24" autocomplete="off"><div class="row" style="margin-top:14px"><button class="btn pri" id="go" type="button">Regenerate</button><button class="btn" id="pr" type="button">Print / save as PDF</button></div></div>
+<article class="paper" id="paper"></article>
+</div>
+<footer class="lab"><div class="wrap"><b>Parody.</b> HyperSlop is a fictional brand that pokes fun at meme-coin narratives. Nothing here is a token, a project or financial advice, and nothing connects to a wallet or a chain.</div></footer>
+<script src="lab.js"></script>
+<script>
+var n=0;
+function cap(s){return s.charAt(0).toUpperCase()+s.slice(1)}
+function wp(){var nm=($('nm').value.trim()||'HyperSlop').slice(0,24),r=rng(nm+n);
+ var a=pick(r,W.adj),b=pick(r,W.adj),no=pick(r,W.noun),v=pick(r,W.verb),o=pick(r,W.obj);
+ var sec=function(t,p){return '<h3>'+t+'</h3><p>'+p+'</p>'};
+ var h='<span class="stamp">PARODY · NOT A TOKEN</span><h2>'+nm+': a '+a+', '+b+' '+no+'</h2><div class="by">Whitepaper v'+(1+Math.floor(r()*3))+'.'+Math.floor(r()*9)+' · The '+nm+' Foundation (does not exist)</div>';
+ h+=sec('Abstract',nm+' is a '+a+' '+no+' that '+v+' '+o+'. By leveraging a novel '+pick(r,W.noun)+', we enable stakeholders to realize outcomes that were previously unrealizable. This paper describes our approach at a level of detail that will not trouble you.');
+ h+=sec('1. Introduction','The world is changing. Existing solutions are fragmented, siloed and, crucially, not ours. '+nm+' addresses this by introducing a unified '+pick(r,W.noun)+' built on '+pick(r,W.adj)+' principles.');
+ h+=sec('2. Problem Statement','Today, '+pick(r,W.obj)+' remains '+pick(r,['underserved','misaligned','trapped in legacy paradigms','locked behind gatekeepers'])+'. Our research (a conversation) suggests this costs the ecosystem billions (a number).');
+ h+=sec('3. Solution','The '+nm+' Synergy Layer introduces a '+pick(r,W.adj)+' mechanism through which participants may '+pick(r,['stake attention','delegate vibes','bond sentiment','contribute presence'])+' in exchange for a share of future value (see: Q3).');
+ h+='<h3>4. Architecture</h3><pre>   [ Users ] ──► [ Synergy Layer ] ──► [ '+cap(no)+' ]\n                     │                    │\n                     ▼                    ▼\n             [ Agent Mesh ] ◄──────► [ Vibes Oracle ]</pre>';
+ h+='<h3>5. Tokenomics</h3><table><tr><td>Total supply</td><td>'+pick(r,['1,000,000,000','8,888,888,888','69,000,000'])+'</td></tr><tr><td>Community</td><td>100%</td></tr><tr><td>Team</td><td>0% (not applicable)</td></tr><tr><td>Tax</td><td>0%</td></tr><tr><td>Utility</td><td>'+pick(r,['Q3','forthcoming','conceptual'])+'</td></tr></table>';
+ h+=sec('6. Roadmap','Q3: Announce. Q3: Announce more. Q3: '+pick(r,['Layer 3','the marketplace','the mesh','a partnership'])+'. Beyond Q3: please see Q3.');
+ h+=sec('7. Team','Our team is composed of '+pick(r,['seasoned','passionate','battle-tested','anonymous'])+' contributors from '+pick(r,['leading institutions','the trenches','stealth','a group chat'])+'. Names withheld to protect the vibes.');
+ h+=sec('8. Disclaimer','This document is a parody. '+nm+' does not exist, issues no token and offers no financial product. If a real whitepaper reads like this, close the tab.');
+ $('paper').innerHTML=h}
+$('go').onclick=function(){n++;wp()};$('nm').oninput=function(){n=0;wp()};$('pr').onclick=function(){window.print()};wp();</script>
+</body></html>

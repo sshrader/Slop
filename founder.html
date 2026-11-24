@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Founder post generator · HyperSlop</title>
+<meta name="description" content=""Excited to announce." Pick a style, get the launch post everybody has already read forty times.">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=Space+Grotesk:wght@500;700&display=swap">
+<link rel="stylesheet" href="lab.css">
+<style>
+.post{white-space:pre-wrap;line-height:1.55;margin:0 0 14px;font-size:16px}
+.pc{margin-bottom:14px}.pc .t{font:500 11px "JetBrains Mono",monospace;letter-spacing:.08em;text-transform:uppercase;color:var(--vio);margin-bottom:10px}
+</style></head><body>
+<div class="wrap">
+<header class="lab"><a class="logo" href="index.html">HyperSlop<span>.ai</span></a><a class="back" href="index.html#lab">← All experiments</a></header>
+<span class="tag">Voice</span>
+<h1>Founder post generator</h1>
+<p class="sub">"Excited to announce." Pick a style, get the launch post everybody has already read forty times.</p>
+<div class="card" style="margin-bottom:16px"><label for="nm">Project name</label><input id="nm" value="HyperSlop" maxlength="24" autocomplete="off"><div class="row" style="margin-top:14px"><button class="btn pri" id="go" type="button">Generate</button></div></div><div id="res"></div>
+</div>
+<footer class="lab"><div class="wrap"><b>Parody.</b> HyperSlop is a fictional brand that pokes fun at meme-coin narratives. Nothing here is a token, a project or financial advice, and nothing connects to a wallet or a chain.</div></footer>
+<script src="lab.js"></script>
+<script>
+var n=0;
+function posts(nm,r){var a=pick(r,W.adj),b=pick(r,W.adj),no=pick(r,W.noun),v=pick(r,W.verb),o=pick(r,W.obj),pct=pick(r,['420','1,337','69','10,000']);
+ return [
+ ['Humble announcement','Some personal news.\n\nAfter months in stealth, I\'m beyond excited to share '+nm+': the first '+a+' '+no+' that '+v+' '+o+'.\n\nI\'m humbled by the support. I\'m nobody. I just believe in the vision.\n\nMore soon. (Q3.)'],
+ ['The thread','1/ We are launching '+nm+'.\n\n2/ A '+a+', '+b+' '+no+'.\n\n3/ Why now? Because '+o+' is broken.\n\n4/ How? Our '+pick(r,W.noun)+' '+pick(r,W.verb)+' it.\n\n5/ What is the token for? Great question.\n\n6/ Roadmap: see Q3.\n\n7/ Please like and repost. Alignment is everything.'],
+ ['The pivot','Plot twist.\n\nWe were a meme. Then we were a community. Now '+nm+' is an '+a+' '+no+'.\n\nPeople said it couldn\'t be done. They were right, but we did it anyway.\n\nBuilders build.'],
+ ['The milestone','We just hit '+pct+'% growth in a week.\n\nWhat is it measuring? Vibes.\n\nThank you to our incredible community. '+nm+' is just getting started.'],
+ ['The denial','To be clear: '+nm+' has no roadmap. No promises. No team to blame.\n\nIt\'s just a '+a+' '+no+' and a dream.\n\n(Roadmap is below.)']]}
+function render(){var nm=($('nm').value.trim()||'HyperSlop').slice(0,24),r=rng(nm+n),res=$('res');res.innerHTML='';
+ posts(nm,r).forEach(function(p){var c=document.createElement('div');c.className='card pc';c.innerHTML='<div class="t"></div><div class="post"></div>';c.firstChild.textContent=p[0];c.children[1].textContent=p[1];var b=document.createElement('button');b.className='btn';b.textContent='Copy';b.onclick=function(){copy(p[1],b)};c.appendChild(b);res.appendChild(c)})}
+$('go').onclick=function(){n++;render()};$('nm').oninput=function(){n=0;render()};render();</script>
+</body></html>

@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Coin card maker · HyperSlop</title>
+<meta name="description" content="Type any name. Get a ridiculous fake coin card you can download and post. It says "parody" right on the card.">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=Space+Grotesk:wght@500;700&display=swap">
+<link rel="stylesheet" href="lab.css">
+<style>
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:18px;align-items:start}
+canvas{width:100%;height:auto;border-radius:14px;border:1px solid var(--line);background:#000}
+@media(max-width:720px){.grid2{grid-template-columns:1fr}}
+</style></head><body>
+<div class="wrap">
+<header class="lab"><a class="logo" href="index.html">HyperSlop<span>.ai</span></a><a class="back" href="index.html#lab">← All experiments</a></header>
+<span class="tag">Shareable</span>
+<h1>Coin card maker</h1>
+<p class="sub">Type any name. Get a ridiculous fake coin card you can download and post. It says "parody" right on the card.</p>
+<div class="grid2"><div class="card"><label for="nm">Name your coin (or yourself)</label><input id="nm" value="Dave" maxlength="24" autocomplete="off"><div class="row" style="margin-top:14px"><button class="btn pri" id="go" type="button">Remix</button><button class="btn" id="dl" type="button">Download PNG</button></div><p class="sub" style="margin:14px 0 0;font-size:14px">Same name gives the same card. Press Remix for a different roll.</p></div>
+<canvas id="cv" width="800" height="1000"></canvas></div>
+</div>
+<footer class="lab"><div class="wrap"><b>Parody.</b> HyperSlop is a fictional brand that pokes fun at meme-coin narratives. Nothing here is a token, a project or financial advice, and nothing connects to a wallet or a chain.</div></footer>
+<script src="lab.js"></script>
+<script>
+var seedN=0;
+function ticker(n){var c=n.toUpperCase().replace(/[^A-Z0-9]/g,'');var v=c.replace(/[AEIOU]/g,'');return ((v.length>=3?v:c)||'SLOP').slice(0,5)}
+function card(){var name=($('nm').value.trim()||'Slop').slice(0,24),r=rng(name+'|'+seedN),tk=ticker(name);
+ var supply=pick(r,['1,000,000,000','420,690,000,000','69,000,000','8,888,888,888','21,000,000,000']);
+ var score=70+Math.floor(r()*30);
+ var line=cap(pick(r,['The first '+pick(r,W.adj)+', '+pick(r,W.adj)+' '+pick(r,W.noun)+' that '+pick(r,W.verb)+' '+pick(r,W.obj)+'.']));
+ var rows=[['Supply',supply],['Tax','0% (for the vibes)'],['Team','anon, in stealth'],['Liquidity',pick(r,['burned by an AI','locked emotionally','vibes-backed','Q3'])],['Utility',pick(r,['soon','Q3','tbd','a roadmap'])]];
+ var c=$('cv'),x=c.getContext('2d'),W_=800,H=1000;
+ var g=x.createLinearGradient(0,0,W_,H);g.addColorStop(0,'#0b0d12');g.addColorStop(.55,'#14102b');g.addColorStop(1,'#07080a');x.fillStyle=g;x.fillRect(0,0,W_,H);
+ var rg=x.createRadialGradient(620,150,10,620,150,420);rg.addColorStop(0,'rgba(138,92,255,.45)');rg.addColorStop(1,'rgba(138,92,255,0)');x.fillStyle=rg;x.fillRect(0,0,W_,H);
+ x.strokeStyle='#1b2027';x.lineWidth=2;rr(x,28,28,W_-56,H-56,28);x.stroke();
+ var cg=x.createConicGradient?x.createConicGradient(0,110,128):null;if(cg){cg.addColorStop(0,'#c6ff3d');cg.addColorStop(.4,'#3de0ff');cg.addColorStop(.75,'#8a5cff');cg.addColorStop(1,'#c6ff3d');x.fillStyle=cg}else x.fillStyle='#c6ff3d';
+ x.beginPath();x.arc(110,128,48,0,7);x.fill();
+ x.fillStyle='#0b0d06';x.font='700 38px "Space Grotesk",sans-serif';x.textAlign='center';x.fillText(tk.slice(0,2),110,141);x.textAlign='left';
+ x.fillStyle='#f2f5f7';x.font='700 56px "Space Grotesk",sans-serif';x.fillText(fit(x,name,520,56),186,122);
+ x.fillStyle='#c6ff3d';x.font='500 28px "JetBrains Mono",monospace';x.fillText('$'+tk,188,166);
+ x.fillStyle='#b6c2cc';x.font='500 30px "Space Grotesk",sans-serif';wrap(x,line,70,260,660,42);
+ var y=470;rows.forEach(function(rw){x.strokeStyle='#1b2027';x.beginPath();x.moveTo(70,y+18);x.lineTo(730,y+18);x.stroke();x.fillStyle='#8b96a1';x.font='500 24px "JetBrains Mono",monospace';x.fillText(rw[0],70,y);x.fillStyle='#f2f5f7';x.textAlign='right';x.fillText(rw[1],730,y);x.textAlign='left';y+=64});
+ x.fillStyle='#8b96a1';x.font='500 22px "JetBrains Mono",monospace';x.fillText('SLOP METER',70,850);x.textAlign='right';x.fillText(score+'%',730,850);x.textAlign='left';
+ x.fillStyle='#1b2027';rr(x,70,866,660,16,8);x.fill();var bg=x.createLinearGradient(70,0,730,0);bg.addColorStop(0,'#c6ff3d');bg.addColorStop(.6,'#ffb454');bg.addColorStop(1,'#ff5a5a');x.fillStyle=bg;rr(x,70,866,660*score/100,16,8);x.fill();
+ x.save();x.translate(400,935);x.rotate(-.04);x.strokeStyle='#ffb454';x.lineWidth=3;rr(x,-240,-30,480,60,10);x.stroke();x.fillStyle='#ffb454';x.font='700 28px "JetBrains Mono",monospace';x.textAlign='center';x.fillText('PARODY · NOT A TOKEN',0,10);x.restore()}
+function cap(s){return s.charAt(0).toUpperCase()+s.slice(1)}
+function rr(x,a,b,w,h,r){x.beginPath();x.moveTo(a+r,b);x.arcTo(a+w,b,a+w,b+h,r);x.arcTo(a+w,b+h,a,b+h,r);x.arcTo(a,b+h,a,b,r);x.arcTo(a,b,a+w,b,r);x.closePath()}
+function fit(x,t,max,px){while(x.measureText(t).width>max&&t.length>3)t=t.slice(0,-1);return t}
+function wrap(x,t,a,b,w,lh){var words=t.split(' '),line='';words.forEach(function(wd){var test=line+wd+' ';if(x.measureText(test).width>w&&line){x.fillText(line,a,b);line=wd+' ';b+=lh}else line=test});x.fillText(line,a,b)}
+$('go').onclick=function(){seedN++;card()};$('nm').oninput=function(){seedN=0;card()};
+$('dl').onclick=function(){var a=document.createElement('a');a.download='parody-coin-card.png';a.href=$('cv').toDataURL('image/png');a.click()};
+(document.fonts&&document.fonts.load?Promise.all([document.fonts.load('700 56px "Space Grotesk"'),document.fonts.load('500 24px "JetBrains Mono"')]).catch(function(){}):Promise.resolve()).then(card);</script>
+</body></html>

@@ -1,0 +1,27 @@
+:root{--bg:#07080a;--panel:#0e1115;--line:#1b2027;--fg:#f2f5f7;--mut:#8b96a1;--acid:#c6ff3d;--vio:#8a5cff;--cy:#3de0ff;--warn:#ffb454;--bad:#ff5a5a}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.55 "Space Grotesk",system-ui,sans-serif;overflow-x:hidden;min-height:100vh}
+body::before{content:"";position:fixed;inset:0;z-index:-1;background:radial-gradient(600px 400px at 85% -5%,rgba(138,92,255,.25),transparent 70%),radial-gradient(500px 380px at 5% 30%,rgba(61,224,255,.12),transparent 70%)}
+a{color:inherit}
+.wrap{max-width:860px;margin:0 auto;padding:0 20px}
+.mono{font-family:"JetBrains Mono",ui-monospace,monospace}
+header.lab{display:flex;align-items:center;gap:14px;padding:18px 0;flex-wrap:wrap}
+header.lab a.logo{font-weight:700;letter-spacing:-.02em;text-decoration:none}
+header.lab a.logo span{color:var(--acid)}
+header.lab a.back{margin-left:auto;color:var(--mut);text-decoration:none;font-size:14px;padding:7px 12px;border-radius:99px}
+header.lab a.back:hover{color:var(--fg);background:var(--panel)}
+.tag{font:500 11px "JetBrains Mono",monospace;letter-spacing:.08em;text-transform:uppercase;color:var(--acid)}
+h1{font-size:clamp(30px,5.5vw,48px);line-height:1.08;letter-spacing:-.03em;margin:8px 0 10px;text-wrap:balance}
+.sub{color:var(--mut);margin:0 0 26px;max-width:620px}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:20px}
+.btn{font:inherit;font-weight:700;border:1px solid var(--line);background:var(--panel);color:var(--fg);padding:11px 18px;border-radius:12px;cursor:pointer;text-decoration:none;display:inline-block}
+.btn.pri{background:var(--acid);color:#0b0d06;border-color:var(--acid)}
+.btn:hover{filter:brightness(1.12)}
+.btn:disabled{opacity:.45;cursor:default}
+.row{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+input,textarea{font:inherit;color:var(--fg);background:#050607;border:1px solid var(--line);border-radius:12px;padding:11px 14px;width:100%}
+input:focus,textarea:focus{outline:2px solid var(--vio);outline-offset:1px}
+label{display:block;font-size:13px;color:var(--mut);margin:0 0 6px}
+footer.lab{border-top:1px solid var(--line);margin-top:56px;padding:26px 0 56px;color:var(--mut);font-size:13px}
+footer.lab b{color:var(--warn);font-weight:500}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}

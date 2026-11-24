@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Trenches translator · HyperSlop</title>
+<meta name="description" content="Type a normal sentence. Get it back in degen pitch speak, or in VC speak.">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=Space+Grotesk:wght@500;700&display=swap">
+<link rel="stylesheet" href="lab.css">
+<style>
+.out{min-height:110px;font-size:19px;line-height:1.5;white-space:pre-wrap}
+.seg{display:inline-flex;border:1px solid var(--line);border-radius:12px;overflow:hidden}.seg button{font:inherit;color:var(--mut);background:var(--panel);border:0;padding:9px 16px;cursor:pointer}.seg button.on{background:var(--acid);color:#0b0d06;font-weight:700}
+</style></head><body>
+<div class="wrap">
+<header class="lab"><a class="logo" href="index.html">HyperSlop<span>.ai</span></a><a class="back" href="index.html#lab">← All experiments</a></header>
+<span class="tag">Toy</span>
+<h1>Trenches translator</h1>
+<p class="sub">Type a normal sentence. Get it back in degen pitch speak, or in VC speak.</p>
+<div class="card"><label for="in">Say something normal</label><textarea id="in" rows="3">I think this idea is good, and my friend wants to buy some soon. We should wait and see.</textarea>
+<div class="row" style="margin:14px 0"><div class="seg" id="seg"><button class="on" data-m="degen" type="button">Degen</button><button data-m="vc" type="button">VC</button></div><button class="btn" id="re" type="button">Re-roll</button></div>
+<label>Result</label><div class="card out" id="out" style="background:#050607"></div><div class="row" style="margin-top:12px"><button class="btn pri" id="cp" type="button">Copy</button></div></div>
+</div>
+<footer class="lab"><div class="wrap"><b>Parody.</b> HyperSlop is a fictional brand that pokes fun at meme-coin narratives. Nothing here is a token, a project or financial advice, and nothing connects to a wallet or a chain.</div></footer>
+<script src="lab.js"></script>
+<script>
+var D={degen:{rules:[[/\bbuy(ing)?\b/gi,'aping in'],[/\bsell(ing)?\b/gi,'taking profits (cope)'],[/\bmoney\b/gi,'liquidity'],[/\bidea\b/gi,'narrative'],[/\bfriends?\b/gi,'fren'],[/\bgood\b/gi,'bullish'],[/\bbad\b/gi,'bearish'],[/\bvery\b/gi,'hyper'],[/\bapp\b/gi,'protocol'],[/\bwebsite\b/gi,'dApp'],[/\bwait\b/gi,'accumulate'],[/\bcompany\b/gi,'DAO'],[/\bteam\b/gi,'anon core contributors'],[/\bsoon\b/gi,'Q3'],[/\bwe should\b/gi,'we are going to'],[/\bI think\b/gi,'NFA but'],[/\blost\b/gi,'got rugged on'],[/\bsee\b/gi,'DYOR'],[/\bprice\b/gi,'chart'],[/\bwill go up\b/gi,'is going to send']],pre:['GM.','Ser,','Anon,','Gm degens.'],post:['NFA. DYOR. LFG.','wagmi.','Number go up.','Lfg.','In the trenches we trust.']},
+vc:{rules:[[/\bbuy(ing)?\b/gi,'deploying capital into'],[/\bsell(ing)?\b/gi,'realizing a liquidity event on'],[/\bmoney\b/gi,'dry powder'],[/\bidea\b/gi,'thesis'],[/\bfriends?\b/gi,'network'],[/\bgood\b/gi,'asymmetric'],[/\bbad\b/gi,'a headwind'],[/\bvery\b/gi,'meaningfully'],[/\bapp\b/gi,'platform'],[/\bwebsite\b/gi,'front door'],[/\bwait\b/gi,'monitor the market for'],[/\bcompany\b/gi,'portfolio company'],[/\bteam\b/gi,'founding team'],[/\bsoon\b/gi,'in the near-to-medium term'],[/\bwe should\b/gi,'we are well positioned to'],[/\bI think\b/gi,'Our conviction is that'],[/\bsee\b/gi,'gather more signal']],pre:['Excited to share:','Quick thought.','Reflecting on the cycle:'],post:['Not investment advice. Alignment is everything.','Building in public.','More to come.']}};
+var mode='degen',roll=0;
+function tr(){var s=$('in').value,r=rng(s+mode+roll),cfg=D[mode];
+ cfg.rules.forEach(function(p){s=s.replace(p[0],p[1])});
+ $('out').textContent=pick(r,cfg.pre)+' '+s+'\n\n'+pick(r,cfg.post)}
+document.querySelectorAll('#seg button').forEach(function(b){b.onclick=function(){mode=b.dataset.m;document.querySelectorAll('#seg button').forEach(function(x){x.className=x===b?'on':''});roll=0;tr()}});
+$('in').oninput=function(){roll=0;tr()};$('re').onclick=function(){roll++;tr()};$('cp').onclick=function(){copy($('out').textContent,this)};tr();</script>
+</body></html>

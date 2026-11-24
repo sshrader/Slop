@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Slop or Not? · HyperSlop</title>
+<meta name="description" content="Real project, or generated slop? Twelve pitches. Guess fast.">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=Space+Grotesk:wght@500;700&display=swap">
+<link rel="stylesheet" href="lab.css">
+<style>
+.q{font-size:clamp(19px,3.2vw,24px);line-height:1.4;min-height:120px}
+.fb{margin-top:14px;min-height:54px;color:var(--mut)}
+.fb b.ok{color:var(--acid)}.fb b.no{color:var(--bad)}
+.bar{height:8px;border-radius:99px;background:var(--line);overflow:hidden;margin-bottom:16px}.bar i{display:block;height:100%;background:linear-gradient(90deg,var(--acid),var(--cy));width:0;transition:width .3s}
+</style></head><body>
+<div class="wrap">
+<header class="lab"><a class="logo" href="index.html">HyperSlop<span>.ai</span></a><a class="back" href="index.html#lab">← All experiments</a></header>
+<span class="tag">Game</span>
+<h1>Slop or Not?</h1>
+<p class="sub">Real project, or generated slop? Twelve pitches. Guess fast.</p>
+<div class="card" id="g"><div class="bar"><i id="pb"></i></div><div class="row mono" style="justify-content:space-between;color:var(--mut);font-size:13px"><span id="cnt">1 / 12</span><span id="sc">Score 0</span></div>
+<p class="q" id="q"></p>
+<div class="row"><button class="btn pri" id="real" type="button">Real project</button><button class="btn" id="slop" type="button">Slop</button></div>
+<div class="fb" id="fb"></div><div class="row"><button class="btn" id="nx" type="button" hidden>Next</button></div></div>
+<div class="card" id="end" hidden><h2 style="margin:0 0 6px" id="et"></h2><p class="sub" id="ed" style="margin-bottom:16px"></p><div class="row"><button class="btn pri" id="again" type="button">Play again</button><button class="btn" id="share" type="button">Copy my score</button></div></div>
+</div>
+<footer class="lab"><div class="wrap"><b>Parody.</b> HyperSlop is a fictional brand that pokes fun at meme-coin narratives. Nothing here is a token, a project or financial advice, and nothing connects to a wallet or a chain.</div></footer>
+<script src="lab.js"></script>
+<script>
+var items=[
+{t:"A command-line tool that converts Markdown to PDF. Open source under the MIT licence, 40 contributors, a release every two weeks.",slop:false,why:"Specific, checkable, boring. That's what real looks like."},
+{t:"The first autonomous, quantum-resistant intelligence mesh that tokenizes attention for the next billion users.",slop:true,why:"Five buzzwords, zero things you could open or use."},
+{t:"A small library that retries failed network requests with exponential backoff. 12 KB, tests included, used by a few thousand projects.",slop:false,why:"It does one thing, and it says what the thing is."},
+{t:"Our agentic Layer 3 harmonizes omnichain liquidity through a zero-knowledge coordination protocol.",slop:true,why:"No sentence here describes something that happens."},
+{t:"A spreadsheet add-on that finds duplicate rows. Free, one page of docs, a changelog going back three years.",slop:false,why:"A changelog is hard to fake."},
+{t:"Decentralized AI that is trustless, permissionless and community-owned. Partnerships announced soon.",slop:true,why:"\"Announced soon\" is doing a lot of work."},
+{t:"A recipe app for people with a single pan and 20 minutes. Free tier, paid tier, a support email that answers.",slop:false,why:"A boring business model is a good sign."},
+{t:"We don't build technology. We build narratives that unlock a flywheel of incentives for human-AI synergy.",slop:true,why:"Honest about the vibes, silent about the product."},
+{t:"An open-source tool that checks your config files for typos. Source on GitHub, a README with examples, issues answered within a day.",slop:false,why:"You can read the code before you trust it."},
+{t:"Q3: Mesh v1. Q3: Agent Marketplace. Q3: Layer 3. Q3: strategic partnerships.",slop:true,why:"Everything is next quarter. Forever."},
+{t:"A tiny weather widget for your phone's home screen. One developer, a public roadmap, an honest 'this is a hobby project' note.",slop:false,why:"Small, named and unglamorous."},
+{t:"Powered by AI. Verified by zero-knowledge. Owned by the community. Built by a team in stealth.",slop:true,why:"'Stealth' means 'you can't check'."}];
+var order,i,score;
+function start(){order=shuffle(items);i=0;score=0;$('g').hidden=false;$('end').hidden=true;show()}
+function show(){var it=order[i];$('q').textContent='"'+it.t+'"';$('cnt').textContent=(i+1)+' / '+order.length;$('sc').textContent='Score '+score;$('pb').style.width=(i/order.length*100)+'%';$('fb').textContent='';$('nx').hidden=true;$('real').disabled=false;$('slop').disabled=false}
+function ans(s){var it=order[i],ok=(s===it.slop);if(ok)score++;$('real').disabled=true;$('slop').disabled=true;
+ $('fb').innerHTML='<b class="'+(ok?'ok':'no')+'">'+(ok?'Correct. ':'Nope. ')+'</b>It was '+(it.slop?'slop. ':'a real kind of project. ')+it.why;$('sc').textContent='Score '+score;$('nx').hidden=false;$('nx').textContent=i===order.length-1?'See result':'Next'}
+$('real').onclick=function(){ans(false)};$('slop').onclick=function(){ans(true)};
+$('nx').onclick=function(){i++;if(i>=order.length)finish();else show()};
+function finish(){$('g').hidden=true;$('end').hidden=false;var p=score/order.length,t=p>=.9?'Slop detector':p>=.65?'Sharp eyes':p>=.4?'Mildly slopped':'Fully slopped';
+ $('et').textContent=score+' / '+order.length+' — '+t;$('ed').textContent=p>=.9?'You could spot a rug from the lobby.':p>=.65?'Not many pitches get past you.':p>=.4?'A few got through. It happens to everyone.':'You would have bought the Layer 3. No shame.'}
+$('again').onclick=start;
+$('share').onclick=function(){copy('I scored '+score+'/'+order.length+' on Slop or Not (HyperSlop, a parody). Can you beat it?',this)};
+start();</script>
+</body></html>
